@@ -6,15 +6,6 @@
 # AI---Automated-AP-Invoice-Processing-
 AI-powered Accounts Payable 3-way matching system using FastAPI, Streamlit, SQL, and OpenAI OCR
 
-This is already a **very strong architecture doc** — now I’ll convert it into a **high-impact GitHub README** that looks like a **real enterprise-grade project (SAP-style + AI automation)**.
-
-You can copy-paste this directly into `README.md`.
-
----
-
-# 🚀 FINAL POLISHED README (PRODUCTION GRADE)
-
-```md
 # 📄 AI-Powered Accounts Payable Invoice Processing System
 
 ## 🚀 Overview
