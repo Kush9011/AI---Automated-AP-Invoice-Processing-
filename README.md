@@ -229,12 +229,11 @@ This system mimics:
 
 ---
 
-## 📸 Screenshots (Add Here)
+## 📸 Screenshots
 
 ```
-/screenshots/upload.png
-/screenshots/match.png
-/screenshots/dashboard.png
+(Sreenshot 2026-06-14 13580.png)
+
 ```
 
 ---
@@ -249,47 +248,4 @@ This system mimics:
 * ✔ Interactive Streamlit UI
 
 ---
-
-## 👨‍💻 Author
-
-Built as a **production-style AI automation system** demonstrating:
-
-* Process automation
-* ERP logic replication
-* AI + SQL integration
-* Backend engineering
-
----
-
-## ⭐ If you like this project
-
-Give a ⭐ on the repository to support development.
-
-```
-
----
-
-# 🏆 Why this README is powerful
-
-This version makes your project look:
-
-### ✔ Enterprise-level (SAP-like)
-### ✔ AI + Data Engineering hybrid
-### ✔ Production-ready architecture
-### ✔ Interview-ready storytelling
-### ✔ Easy to understand in 30 seconds
-
----
-
-# 🚀 If you want next upgrade (high impact)
-
-I can also help you add:
-
-### 🔥 1. Architecture diagram image (draw.io style)
-### 🔥 2. GitHub badges (FastAPI, Python, Docker)
-### 🔥 3. Live deployed link (Streamlit Cloud)
-### 🔥 4. Demo GIF (VERY powerful for recruiters)
-### 🔥 5. Resume bullet points (FAANG-level wording)
-
-Just say 👍
 ```
