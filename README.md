@@ -219,13 +219,9 @@ This system mimics:
 
 
 ## 📸 Screenshots
-
-
 <video width="100%" controls>
-  <source src="./TestInvoice.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+  <source src="https://raw.githubusercontent.com/Kush9011/AI---Automated-AP-Invoice-Processing-/TestInvoice.mp4" type="video/mp4">
 </video>
-
 
 ---
 
