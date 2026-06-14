@@ -220,10 +220,9 @@ This system mimics:
 
 ## 📸 Screenshots
 
-```
+
 ![Main Screen](AppOutput.png)
 
-```
 
 ---
 
