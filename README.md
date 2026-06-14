@@ -221,7 +221,7 @@ This system mimics:
 ## 📸 Screenshots
 
 
-<video src="Test Invoice.mp4" controls width="700"></video>
+🎥 [Watch Demo Video](Test%20Invoice.mp4)
 
 
 ---
