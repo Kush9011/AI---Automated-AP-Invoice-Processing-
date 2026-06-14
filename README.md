@@ -221,7 +221,7 @@ This system mimics:
 ## 📸 Screenshots
 
 ```
-![Main Screen](/AppOutput.png)
+![Main Screen](./AppOutput.png)
 
 ```
 
