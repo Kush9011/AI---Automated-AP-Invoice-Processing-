@@ -222,7 +222,7 @@ This system mimics:
 
 ## 📸 Demo Video
 
-👉 [Click here to watch the demo](https://raw.githubusercontent.com/Kush9011/AI---Automated-AP-Invoice-Processing-/main/TestInvoice.mp4)
+👉 [Watch Demo Video](https://github.com/Kush9011/AI---Automated-AP-Invoice-Processing-/blob/main/TestInvoice.mp4)
 
 
 ## 🏆 Project Highlights
