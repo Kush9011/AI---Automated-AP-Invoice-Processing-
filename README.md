@@ -1,3 +1,4 @@
+
 # AI---Automated-AP-Invoice-Processing-
 AI-powered Accounts Payable 3-way matching system using FastAPI, Streamlit, SQL, and OpenAI OCR
 
@@ -222,7 +223,7 @@ This system mimics:
 
 ## 📸 Demo Video
 
-👉 [Watch Demo Video](https://github.com/Kush9011/AI---Automated-AP-Invoice-Processing-/blob/main/TestInvoice.mp4)
+https://github.com/user-attachments/assets/301da568-1f4c-4c40-95fc-ea882115e25
 
 
 ## 🏆 Project Highlights
