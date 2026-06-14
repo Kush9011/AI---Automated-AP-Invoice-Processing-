@@ -216,23 +216,12 @@ This system mimics:
 * Oracle Financials
 * Coupa / Ariba workflows
 
----
 
-## 📈 Future Enhancements
-
-* 🐳 Docker deployment
-* ☁️ AWS / Cloud hosting
-* 🔄 Kafka event-driven pipeline
-* 📊 Power BI integration
-* 🔐 Role-based access control
-* 📜 Audit trail & compliance logs
-
----
 
 ## 📸 Screenshots
 
 ```
-!(Sreenshot 2026-06-14 13580.png)
+![](Sreenshot 2026-06-14 13580.png)
 
 ```
 
