@@ -222,7 +222,7 @@ This system mimics:
 <video width="100%" controls>
   <source src="https://raw.githubusercontent.com/Kush9011/AI---Automated-AP-Invoice-Processing-/main/TestInvoice.mp4" type="video/mp4">
 </video>
----
+
 
 ## 🏆 Project Highlights
 
