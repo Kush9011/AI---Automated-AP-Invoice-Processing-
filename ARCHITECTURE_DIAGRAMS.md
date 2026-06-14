@@ -4,19 +4,19 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                         FRONTEND (Streamlit)                         │
+│                         FRONTEND (Streamlit)                        │
 │  app.py - Upload → Display → Match → Approve UI                     │
 └──────────────────────────────┬──────────────────────────────────────┘
                                │ HTTP Requests
                                ↓
 ┌─────────────────────────────────────────────────────────────────────┐
-│                      BACKEND (FastAPI)                               │
-│                          main.py                                     │
-│                                                                       │
+│                      BACKEND (FastAPI)                              │
+│                          main.py                                    │
+│                                                                     │
 │  POST /upload      → clear staging → extract → insert               │
-│  POST /match/{id}  → run 3-way match                               │
-│  POST /approve     → move to final                                 │
-│  GET /invoice/{id} → retrieve data                                 │
+│  POST /match/{id}  → run 3-way match                                │
+│  POST /approve     → move to final                                  │
+│  GET /invoice/{id} → retrieve data                                  │
 └──────────────────┬───────────────────────────────┬──────────────────┘
                    │                               │
         ┌──────────↓──────────┐        ┌──────────↓──────────┐
@@ -28,19 +28,19 @@
                                                │
         ┌──────────────────────────────────────↓───────────────────┐
         │         Database Operations (db_service.py)              │
-        │                                                           │
-        │  ┌─────────────────────────────────────────────────┐    │
-        │  │ clear_invoice_staging()                         │    │
-        │  │ insert_staging(invoice_dict)                    │    │
-        │  │ get_po_with_items()                             │    │
-        │  │ get_gr_by_po()                                  │    │
-        │  │ move_invoice_to_final()                         │    │
-        │  └─────────────────────────────────────────────────┘    │
+        │                                                          │
+        │  ┌─────────────────────────────────────────────────┐     │
+        │  │ clear_invoice_staging()                         │     │
+        │  │ insert_staging(invoice_dict)                    │     │
+        │  │ get_po_with_items()                             │     │
+        │  │ get_gr_by_po()                                  │     │
+        │  │ move_invoice_to_final()                         │     │
+        │  └─────────────────────────────────────────────────┘     │
         └────────────────────┬─────────────────────────────────────┘
                              │
         ┌────────────────────↓──────────────────┐
-        │    3-Way Match Engine (match_engine.py)│
-        │                                        │
+        │   3-Way Match Engine (match_engine.py)│
+        │                                       │
         │  For each line item:                  │
         │  1. Get PO line item                  │
         │  2. Get GR line item                  │
@@ -55,7 +55,7 @@
                              │
         ┌────────────────────↓──────────────────┐
         │     SQLAlchemy ORM (models.py)        │
-        │                                        │
+        │                                       │
         │  - 8 database tables                  │
         │  - Relationships & cascades           │
         │  - Composite primary keys             │
@@ -74,88 +74,88 @@
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                                                                   │
+│                                                                  │
 │                   PURCHASE ORDERS                                │
-│                                                                   │
-│  ┌──────────────────────────────┐                               │
-│  │  PurchaseOrder               │                               │
-│  ├──────────────────────────────┤                               │
-│  │ + po_number (PK)             │◄─────────────────┐            │
-│  │ + vendor_id                  │                  │ 1:N        │
-│  │ + po_date                    │                  │            │
-│  └──────────────────────────────┘                  │            │
-│                                                    │            │
-│                                          ┌─────────┴───────┐    │
-│                                          │  POLineItem     │    │
-│                                          ├─────────────────┤    │
-│                                          │ + po_number(FK) │    │
-│                                          │ + item_number   │    │
-│                                          │ + description   │    │
-│                                          │ + qty           │    │
-│                                          │ + unit_price    │    │
-│                                          └─────────────────┘    │
-│                                                                   │
+│                                                                  │
+│  ┌──────────────────────────────┐                                │
+│  │  PurchaseOrder               │                                │
+│  ├──────────────────────────────┤                                │
+│  │ + po_number (PK)             │◄─────────────────┐             │
+│  │ + vendor_id                  │                  │ 1:N         │
+│  │ + po_date                    │                  │             │
+│  └──────────────────────────────┘                  │             │
+│                                                    │             │
+│                                          ┌─────────┴───────┐     │
+│                                          │  POLineItem     │     │
+│                                          ├─────────────────┤     │
+│                                          │ + po_number(FK) │     │
+│                                          │ + item_number   │     │
+│                                          │ + description   │     │
+│                                          │ + qty           │     │
+│                                          │ + unit_price    │     │
+│                                          └─────────────────┘     │
+│                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────────────────────────────┐
-│                                                                   │
+│                                                                  │
 │                   GOODS RECEIPTS                                 │
-│                                                                   │
-│  ┌──────────────────────────────┐                               │
-│  │  GoodsReceipt                │                               │
-│  ├──────────────────────────────┤                               │
-│  │ + gr_id (PK)                 │◄─────────────────┐            │
-│  │ + po_number                  │                  │ 1:N        │
-│  │ + gr_date                    │                  │            │
-│  └──────────────────────────────┘                  │            │
-│                                                    │            │
-│                                          ┌─────────┴───────┐    │
-│                                          │  GRLineItem     │    │
-│                                          ├─────────────────┤    │
-│                                          │ + gr_id (FK)    │    │
-│                                          │ + item_number   │    │
-│                                          │ + po_number     │    │
-│                                          │ + description   │    │
-│                                          │ + received_qty  │    │
-│                                          └─────────────────┘    │
-│                                                                   │
+│                                                                  │
+│  ┌──────────────────────────────┐                                │
+│  │  GoodsReceipt                │                                │
+│  ├──────────────────────────────┤                                │
+│  │ + gr_id (PK)                 │◄─────────────────┐             │
+│  │ + po_number                  │                  │ 1:N         │
+│  │ + gr_date                    │                  │             │
+│  └──────────────────────────────┘                  │             │
+│                                                    │             │
+│                                          ┌─────────┴───────┐     │
+│                                          │  GRLineItem     │     │
+│                                          ├─────────────────┤     │
+│                                          │ + gr_id (FK)    │     │
+│                                          │ + item_number   │     │
+│                                          │ + po_number     │     │
+│                                          │ + description   │     │
+│                                          │ + received_qty  │     │
+│                                          └─────────────────┘     │
+│                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────────────────────────────┐
-│                                                                   │
+│                                                                  │
 │                   INVOICE STAGING                                │
-│                                                                   │
-│  ┌──────────────────────────────────┐                           │
-│  │  InvoiceStaging                  │                           │
-│  ├──────────────────────────────────┤                           │
-│  │ + invoice_id (PK)                │◄──────────────┐           │
-│  │ + po_number                      │               │ 1:N      │
-│  │ + vendor_id                      │               │           │
-│  │ + invoice_date                   │               │           │
-│  │ + status                         │               │           │
-│  └──────────────────────────────────┘               │           │
-│                                           ┌─────────┴────────┐  │
-│                                           │InvoiceLineItemSTG│  │
-│                                           ├─────────────────┤  │
-│                                           │+invoice_id (FK) │  │
-│                                           │+item_number     │  │
-│                                           │+po_number       │  │
-│                                           │+description     │  │
-│                                           │+qty             │  │
-│                                           │+unit_price      │  │
-│                                           │+total_amount    │  │
-│                                           └─────────────────┘  │
-│                                                                   │
+│                                                                  │
+│  ┌──────────────────────────────────┐                            │
+│  │  InvoiceStaging                  │                            │
+│  ├──────────────────────────────────┤                            │
+│  │ + invoice_id (PK)                │◄──────────────┐            │
+│  │ + po_number                      │               │ 1:N        │
+│  │ + vendor_id                      │               │            │
+│  │ + invoice_date                   │               │            │
+│  │ + status                         │               │            │
+│  └──────────────────────────────────┘               │            │
+│                                           ┌─────────┴────────┐   │
+│                                           │InvoiceLineItemSTG│   │
+│                                           ├─────────────────┤    │
+│                                           │+invoice_id (FK) │    │
+│                                           │+item_number     │    │
+│                                           │+po_number       │    │
+│                                           │+description     │    │
+│                                           │+qty             │    │
+│                                           │+unit_price      │    │
+│                                           │+total_amount    │    │
+│                                           └─────────────────┘    │
+│                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────────────────────────────┐
-│                                                                   │
+│                                                                  │
 │                   INVOICE FINAL                                  │
-│                                                                   │
+│                                                                  │
 │  (Same structure as InvoiceStaging, but for approved invoices)   │
-│                                                                   │
-│  InvoiceFinal (1) ◄─────────1:N─────► InvoiceLineItemFinal      │
-│                                                                   │
+│                                                                  │
+│  InvoiceFinal (1) ◄─────────1:N─────► InvoiceLineItemFinal       │
+│                                                                  │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -167,45 +167,45 @@
 USER UPLOADS INVOICE PDF
         ↓
    ┌────────────────────────────────────┐
-   │ POST /upload (main.py)              │
+   │ POST /upload (main.py)             │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ clear_invoice_staging()             │
-   │ → DELETE all staging rows           │
+   │ clear_invoice_staging()            │
+   │ → DELETE all staging rows          │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ extract_text(pdf_bytes)             │
-   │ → PyMuPDF reads PDF                 │
-   │ → Returns: raw text from pages      │
+   │ extract_text(pdf_bytes)            │
+   │ → PyMuPDF reads PDF                │
+   │ → Returns: raw text from page      │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ extract_invoice(text)               │
-   │ → GPT-4 parses text                 │
-   │ → Returns: structured JSON          │
-   │   {                                 │
-   │     invoice_id, po_number, ...      │
-   │     line_items: [                   │
+   │ extract_invoice(text)              │
+   │ → GPT-4 parses text                │
+   │ → Returns: structured JSON         │
+   │   {                                │
+   │     invoice_id, po_number, ...     │
+   │     line_items: [                  │
    │       {item_number, qty, price...} │
-   │     ]                               │
-   │   }                                 │
+   │     ]                              │
+   │   }                                │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ insert_staging(invoice_dict)        │
-   │ → Create InvoiceStaging row         │
-   │ → Create N InvoiceLineItemStaging   │
-   │   rows (one per line item)          │
-   └────────────┬───────────────────────┘
+   │ insert_staging(invoice_dict)       │
+   │ → Create InvoiceStaging row        │
+   │ → Create N InvoiceLineItemStaging  │
+   │   rows (one per line item)         │
+   └────────────┬────────────────────── ┘
                 ↓
    ┌────────────────────────────────────┐
-   │ RESPONSE TO CLIENT                  │
-   │ {                                   │
-   │   invoice_id, line_items_count,     │
-   │   extracted_data                    │
-   │ }                                   │
+   │ RESPONSE TO CLIENT                 │
+   │ {                                  │
+   │   invoice_id, line_items_count,    │
+   │   extracted_data                   │
+   │ }                                  │
    └────────────────────────────────────┘
         ↓
 USER SEES EXTRACTED INVOICE & LINE ITEMS
@@ -213,18 +213,18 @@ USER SEES EXTRACTED INVOICE & LINE ITEMS
 USER CLICKS "RUN MATCH"
         ↓
    ┌────────────────────────────────────┐
-   │ POST /match/{invoice_id}            │
+   │ POST /match/{invoice_id}           │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ run_match(invoice_id)               │
-   │ (match_engine.py)                   │
-   │                                     │
-   │ 1. Get invoice from staging         │
-   │ 2. Get all invoice line items       │
-   │ 3. Get PO with line items           │
-   │ 4. Get GR with line items           │
-   │                                     │
+   │ run_match(invoice_id)              │
+   │ (match_engine.py)                  │
+   │                                    │
+   │ 1. Get invoice from staging        │
+   │ 2. Get all invoice line items      │
+   │ 3. Get PO with line items          │
+   │ 4. Get GR with line items          │
+   │                                    │
    └────────────┬───────────────────────┘
                 ↓
     ┌──────────────────────────────────┐
@@ -240,7 +240,7 @@ USER CLICKS "RUN MATCH"
     │ 3. Qty: INV qty == GR qty?       │
     │ 4. Price: INV price == PO price? │
     │ 5. Total: INV total ==           │
-    │    (INV qty × PO price)?          │
+    │    (INV qty × PO price)?         │
     │                                  │
     │ Status: PASS or FAIL             │
     └──────────────┬───────────────────┘
@@ -270,26 +270,26 @@ USER SEES MATCH RESULTS
 IF APPROVED: USER CLICKS "APPROVE"
         ↓
    ┌────────────────────────────────────┐
-   │ POST /approve/{invoice_id}          │
+   │ POST /approve/{invoice_id}         │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ move_invoice_to_final(...)          │
-   │                                     │
-   │ 1. Get invoice from staging         │
-   │ 2. Create InvoiceFinal row          │
-   │ 3. Create N InvoiceLineItemFinal    │
-   │    rows (with match status)         │
-   │ 4. Delete from staging              │
-   │                                     │
+   │ move_invoice_to_final(...)         │
+   │                                    │
+   │ 1. Get invoice from staging        │
+   │ 2. Create InvoiceFinal row         │
+   │ 3. Create N InvoiceLineItemFinal   │
+   │    rows (with match status)        │
+   │ 4. Delete from staging             │
+   │                                    │
    └────────────┬───────────────────────┘
                 ↓
    ┌────────────────────────────────────┐
-   │ RESPONSE TO CLIENT                  │
-   │ {                                   │
-   │   success: true,                    │
-   │   message: "Invoice moved..."       │
-   │ }                                   │
+   │ RESPONSE TO CLIENT                 │
+   │ {                                  │
+   │   success: true,                   │
+   │   message: "Invoice moved..."      │
+   │ }                                  │
    └────────────────────────────────────┘
         ↓
 USER SEES SUCCESS MESSAGE
@@ -333,12 +333,12 @@ STEP 1: UPLOAD
 STEP 2: MATCH
 ┌──────────────────────────────────────────────────────┐
 │ SELECT from:                                         │
-│  invoice_staging WHERE id = INV-123 ✓ (1 row)       │
+│  invoice_staging WHERE id = INV-123 ✓ (1 row)        │
 │  invoice_line_items_staging WHERE id = INV-123       │
 │    ✓ (3 rows)                                        │
-│  po_line_items WHERE po_number = PO-1001            │
+│  po_line_items WHERE po_number = PO-1001             │
 │    ✓ (3 rows)                                        │
-│  gr_line_items WHERE gr_id = GR-1001                │
+│  gr_line_items WHERE gr_id = GR-1001                 │
 │    ✓ (3 rows)                                        │
 │                                                      │
 │ Run checks on each triplet:                          │
@@ -441,17 +441,6 @@ Input: Invoice Line Item (INV-123, 001, qty=10, price=100)
 │ All 5 checks passed ✓                       │
 └─────────────────────────────────────────────┘
 
-Output: {
-  item_number: "001",
-  status: "PASS",
-  checks: [
-    {check_name: "PO Line Item Exists", result: "PASS"},
-    {check_name: "GR Line Item Exists", result: "PASS"},
-    {check_name: "Quantity Match", result: "PASS"},
-    {check_name: "Unit Price Match", result: "PASS"},
-    {check_name: "Total Amount Match", result: "PASS"}
-  ]
-}
 ```
 
 ---
