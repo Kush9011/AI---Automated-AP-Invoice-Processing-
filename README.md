@@ -221,7 +221,7 @@ This system mimics:
 ## 📸 Screenshots
 
 ```
-![](Screenshot 2026-06-14 13580.png)
+![main](Screenshot 2026-06-14 13580.png)
 
 ```
 
