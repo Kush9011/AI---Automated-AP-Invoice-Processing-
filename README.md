@@ -221,7 +221,10 @@ This system mimics:
 ## 📸 Screenshots
 
 
-🎥 [Watch Demo Video](TestInvoice.mp4)
+<video width="100%" controls>
+  <source src="./TestInvoice.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 
 ---
