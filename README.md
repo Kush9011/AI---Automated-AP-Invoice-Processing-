@@ -220,7 +220,9 @@ This system mimics:
 
 ## 📸 Demo
 
-[![Watch Demo](https://img.shields.io/badge/▶️-Watch%20Demo-blue)](https://raw.githubusercontent.com/Kush9011/AI---Automated-AP-Invoice-Processing-/main/TestInvoice.mp4)
+## 📸 Demo Video
+
+👉 [Click here to watch the demo](https://raw.githubusercontent.com/Kush9011/AI---Automated-AP-Invoice-Processing-/main/TestInvoice.mp4)
 
 
 ## 🏆 Project Highlights
